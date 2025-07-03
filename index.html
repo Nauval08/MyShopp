@@ -1,288 +1,324 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
   <title>Toko Cihuy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
-    /* Font & Reset */
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       margin: 0;
-      padding: 0;
-      color: #333;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    header {
-      background: #4f46e5;
       color: white;
-      padding: 1rem 2rem;
+    }
+    header {
+      padding: 20px;
+      background: rgba(0,0,0,0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
     }
-
-    header h1 {
-      margin: 0;
-      font-weight: 700;
-      letter-spacing: 2px;
-      font-size: 1.8rem;
-    }
-
-    nav button {
-      background-color: #6366f1;
-      color: white;
+    .btn {
+      padding: 6px 12px;
+      background: #ff9800;
       border: none;
-      padding: 0.6rem 1.2rem;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-left: 1rem;
-      user-select: none;
-    }
-
-    nav button:hover,
-    nav button:focus {
-      background-color: #4f46e5;
-      transform: scale(1.05);
-      outline: none;
-    }
-
-    nav #user-info {
-      margin-left: 1rem;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #e0e7ff;
-    }
-
-    /* Main Content */
-    main {
-      flex-grow: 1;
-      padding: 2rem;
-      max-width: 1100px;
-      margin: auto;
-      width: 100%;
-    }
-
-    h2 {
       color: white;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      text-align: center;
-      user-select: none;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-left: 10px;
     }
-
-    /* Products Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
     .product {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      overflow: hidden;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      will-change: transform;
+      color: black;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      margin: 12px;
+      width: 220px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
-    .product:hover,
-    .product:focus-within {
-      transform: translateY(-12px);
-      box-shadow: 0 25px 35px rgba(0,0,0,0.2);
-    }
-
     .product img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-bottom: 1px solid #eee;
-      user-select: none;
+      max-width: 100%;
+      border-radius: 6px;
     }
-
-    .product h3 {
-      margin: 1rem;
-      font-weight: 700;
-      font-size: 1.1rem;
-      flex-grow: 1;
-    }
-
-    .product p {
-      margin: 0 1rem 1rem;
-      color: #4b5563;
-      font-weight: 600;
-      font-size: 1rem;
-      text-align: right;
-    }
-
-    /* Forms */
-    form input {
-      display: block;
-      margin: 0.7rem 0;
-      padding: 0.6rem 1rem;
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 1rem;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    form input:focus {
-      border-color: #4f46e5;
-      box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
-      outline: none;
-    }
-
-    form button {
-      background-color: #4f46e5;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-weight: 700;
-      border-radius: 10px;
-      cursor: pointer;
-      width: 100%;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      margin-top: 1rem;
-      user-select: none;
-    }
-
-    form button:hover,
-    form button:focus {
-      background-color: #3730a3;
-      transform: scale(1.05);
-      outline: none;
-    }
-
-    /* Modal */
-    .modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
+    #products-list {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
       justify-content: center;
       align-items: center;
-      z-index: 10;
-      padding: 1rem;
     }
-
     .modal-content {
       background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      width: 320px;
-      max-width: 100%;
-      position: relative;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-      animation: fadeIn 0.3s ease forwards;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      color: black;
     }
-
-    .close-modal {
-      position: absolute;
-      top: 10px; right: 15px;
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: #999;
-      cursor: pointer;
-      font-weight: 700;
-      transition: color 0.3s ease;
-      user-select: none;
+    .modal-content input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 6px;
     }
-
-    .close-modal:hover,
-    .close-modal:focus {
-      color: #4f46e5;
-      outline: none;
-    }
-
-    /* Spinner */
-    .spinner {
-      border: 4px solid rgba(0,0,0,0.1);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border-left-color: #6366f1;
-      animation: spin 1s linear infinite;
-      margin: 3rem auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    #loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Toko Cihuy</h1>
-    <nav>
-      <button id="btn-login">Login</button>
-      <button id="btn-logout" style="display:none">Logout</button>
-      <span id="user-info"></span>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Modal Login -->
-    <section id="login-section" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="login-title">
-      <div class="modal-content">
-        <h2 id="login-title">Login</h2>
-        <form id="login-form" autocomplete="off">
-          <input type="email" id="email" placeholder="Email" required autocomplete="username" />
-          <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
-          <button type="submit">Login</button>
-        </form>
-        <p>Belum punya akun? <a href="#" id="show-register">Daftar di sini</a></p>
-        <button class="close-modal" id="close-login" aria-label="Tutup modal login">&times;</button>
-      </div>
-    </section>
+<header>
+  <div><strong>Toko Cihuy</strong></div>
+  <div>
+    <span id="user-info"></span>
+    <button class="btn" id="btn-login">Login</button>
+    <button class="btn" id="btn-logout" style="display:none;">Logout</button>
+  </div>
+</header>
 
-    <!-- Modal Register -->
-    <section id="register-section" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="register-title">
-      <div class="modal-content">
-        <h2 id="register-title">Register</h2>
-        <form id="register-form" autocomplete="off">
-          <input type="text" id="name" placeholder="Nama" required autocomplete="name" />
-          <input type="email" id="reg-email" placeholder="Email" required autocomplete="email" />
-          <input type="password" id="reg-password" placeholder="Password" required autocomplete="new-password" />
-          <button type="submit">Daftar</button>
-        </form>
-        <p>Sudah punya akun? <a href="#" id="show-login">Login di sini</a></p>
-        <button class="close-modal" id="close-register" aria-label="Tutup modal register">&times;</button>
-      </div>
-    </section>
+<section id="products-section">
+  <div id="products-list"></div>
+  <div id="loading">Loading...</div>
+</section>
 
-    <!-- Produk -->
-    <section id="products-section">
-      <h2>Produk</h2>
-      <div id="products-list" class="products-grid" aria-live="polite" aria-busy="false"></div>
-      <div id="loading" class="spinner" style="display:none" aria-hidden="true"></div>
-    </section>
-  </main>
+<!-- Login Modal -->
+<div class="modal" id="login-section">
+  <div class="modal-content">
+    <h3>Login</h3>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button class="btn" type="submit">Masuk</button>
+    </form>
+    <p>Belum punya akun? <a href="#" id="show-register">Daftar</a></p>
+    <button class="btn" id="close-login">Tutup</button>
+  </div>
+</div>
 
-  <script src="app.js"></script>
-  <!-- Tambahkan ini untuk menggunakan API -->
-<script src="https://crud-api-production-1baf.up.railway.app/api/products"></script>
+<!-- Register Modal -->
+<div class="modal" id="register-section">
+  <div class="modal-content">
+    <h3>Daftar</h3>
+    <form id="register-form">
+      <input type="text" id="name" placeholder="Nama" required>
+      <input type="email" id="reg-email" placeholder="Email" required>
+      <input type="password" id="reg-password" placeholder="Password" required>
+      <button class="btn" type="submit">Daftar</button>
+    </form>
+    <p>Sudah punya akun? <a href="#" id="show-login">Login</a></p>
+    <button class="btn" id="close-register">Tutup</button>
+  </div>
+</div>
+
+<script>
+const API_BASE = 'https://rifkira.psl17.my.id/api';
+
+const btnLogin = document.getElementById('btn-login');
+const btnLogout = document.getElementById('btn-logout');
+const userInfo = document.getElementById('user-info');
+
+const loginSection = document.getElementById('login-section');
+const registerSection = document.getElementById('register-section');
+const productsSection = document.getElementById('products-section');
+
+const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
+
+const productsList = document.getElementById('products-list');
+const loadingSpinner = document.getElementById('loading');
+
+let token = localStorage.getItem('token') || null;
+let userName = localStorage.getItem('userName') || null;
+
+function showLogin() {
+  loginSection.style.display = 'flex';
+  registerSection.style.display = 'none';
+}
+
+function showRegister() {
+  registerSection.style.display = 'flex';
+  loginSection.style.display = 'none';
+}
+
+function closeModals() {
+  loginSection.style.display = 'none';
+  registerSection.style.display = 'none';
+}
+
+function showProducts() {
+  productsSection.style.display = 'block';
+  btnLogin.style.display = 'none';
+  btnLogout.style.display = 'inline-block';
+  userInfo.textContent = `Halo, ${userName}`;
+}
+
+function showLoggedOut() {
+  productsSection.style.display = 'block';
+  btnLogin.style.display = 'inline-block';
+  btnLogout.style.display = 'none';
+  userInfo.textContent = '';
+}
+
+btnLogin.addEventListener('click', showLogin);
+btnLogout.addEventListener('click', () => {
+  token = null;
+  userName = null;
+  localStorage.removeItem('token');
+  localStorage.removeItem('userName');
+  showLoggedOut();
+});
+
+document.getElementById('show-register').addEventListener('click', (e) => {
+  e.preventDefault();
+  showRegister();
+});
+document.getElementById('show-login').addEventListener('click', (e) => {
+  e.preventDefault();
+  showLogin();
+});
+document.getElementById('close-login').addEventListener('click', closeModals);
+document.getElementById('close-register').addEventListener('click', closeModals);
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  try {
+    loadingSpinner.style.display = 'block';
+    const res = await fetch(`${API_BASE}/login`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({email, password})
+    });
+    loadingSpinner.style.display = 'none';
+    const data = await res.json();
+    if(res.ok) {
+      token = data.token;
+      userName = data.name || email;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userName', userName);
+      alert('Login berhasil!');
+      closeModals();
+      showProducts();
+      loadProducts();
+    } else {
+      alert(data.message || 'Login gagal');
+    }
+  } catch (err) {
+    loadingSpinner.style.display = 'none';
+    alert('Error: ' + err.message);
+  }
+});
+
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value.trim();
+  try {
+    loadingSpinner.style.display = 'block';
+    const res = await fetch(`${API_BASE}/register`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({name, email, password})
+    });
+    loadingSpinner.style.display = 'none';
+    const data = await res.json();
+    if(res.ok) {
+      alert('Registrasi berhasil! Silakan login.');
+      closeModals();
+      showLogin();
+    } else {
+      alert(data.message || 'Registrasi gagal');
+    }
+  } catch (err) {
+    loadingSpinner.style.display = 'none';
+    alert('Error: ' + err.message);
+  }
+});
+
+async function loadProducts() {
+  productsList.innerHTML = '';
+  loadingSpinner.style.display = 'block';
+  try {
+    const res = await fetch(`${API_BASE}/products`);
+    loadingSpinner.style.display = 'none';
+    const products = await res.json();
+
+    if(res.ok) {
+      if(products.length === 0) {
+        productsList.innerHTML = '<p>Tidak ada produk tersedia.</p>';
+        return;
+      }
+
+      products.forEach(p => {
+        const div = document.createElement('div');
+        div.classList.add('product');
+        div.innerHTML = `
+          <img src="${p.image_url || 'https://via.placeholder.com/220x160?text=No+Image'}" alt="${p.name}" />
+          <h3>${p.name}</h3>
+          <p>Rp ${p.price.toLocaleString('id-ID')}</p>
+          <button class="btn add-to-cart" data-id="${p.id}">🛒 Tambah ke Keranjang</button>
+        `;
+        productsList.appendChild(div);
+      });
+
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!token) {
+            alert('Silakan login dulu ya!');
+            return;
+          }
+          const productId = btn.getAttribute('data-id');
+          try {
+            const res = await fetch(`${API_BASE}/cart/add`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({ product_id: productId, qty: 1 })
+            });
+            const data = await res.json();
+            if (res.ok) {
+              alert('✅ Ditambahkan ke keranjang!');
+            } else {
+              alert(data.message || 'Gagal tambah ke keranjang');
+            }
+          } catch (err) {
+            alert('Error: ' + err.message);
+          }
+        });
+      });
+
+    } else {
+      productsList.innerHTML = '<p>Gagal memuat produk.</p>';
+    }
+  } catch (err) {
+    loadingSpinner.style.display = 'none';
+    productsList.innerHTML = `<p>Error: ${err.message}</p>`;
+  }
+}
+
+window.addEventListener('load', () => {
+  if(token && userName) {
+    showProducts();
+  } else {
+    showLoggedOut();
+  }
+  loadProducts();
+});
+</script>
 
 </body>
 </html>
