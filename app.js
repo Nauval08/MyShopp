@@ -1,4 +1,4 @@
-const API_BASE = 'https://rifkira.psl17.my.id/api';
+const API_BASE = 'https://crud-api-production-1baf.up.railway.app/api/';
 
 const btnLogin = document.getElementById('btn-login');
 const btnLogout = document.getElementById('btn-logout');
