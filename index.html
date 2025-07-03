@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toko Rifkira Mewah</title>
+  <title>Toko Cihuy</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Toko Rifkira</h1>
+    <h1>Toko Cihuy</h1>
     <nav>
       <button id="btn-login">Login</button>
       <button id="btn-logout" style="display:none">Logout</button>
@@ -18,37 +18,40 @@
   </header>
 
   <main>
-    <section id="login-section" class="modal" style="display:none">
+    <!-- Modal Login -->
+    <section id="login-section" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="login-title">
       <div class="modal-content">
-        <h2>Login</h2>
-        <form id="login-form">
-          <input type="email" id="email" placeholder="Email" required />
-          <input type="password" id="password" placeholder="Password" required />
+        <h2 id="login-title">Login</h2>
+        <form id="login-form" autocomplete="off">
+          <input type="email" id="email" placeholder="Email" required autocomplete="username" />
+          <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
           <button type="submit">Login</button>
         </form>
         <p>Belum punya akun? <a href="#" id="show-register">Daftar di sini</a></p>
-        <button class="close-modal" id="close-login">&times;</button>
+        <button class="close-modal" id="close-login" aria-label="Tutup modal login">&times;</button>
       </div>
     </section>
 
-    <section id="register-section" class="modal" style="display:none">
+    <!-- Modal Register -->
+    <section id="register-section" class="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="register-title">
       <div class="modal-content">
-        <h2>Register</h2>
-        <form id="register-form">
-          <input type="text" id="name" placeholder="Nama" required />
-          <input type="email" id="reg-email" placeholder="Email" required />
-          <input type="password" id="reg-password" placeholder="Password" required />
+        <h2 id="register-title">Register</h2>
+        <form id="register-form" autocomplete="off">
+          <input type="text" id="name" placeholder="Nama" required autocomplete="name" />
+          <input type="email" id="reg-email" placeholder="Email" required autocomplete="email" />
+          <input type="password" id="reg-password" placeholder="Password" required autocomplete="new-password" />
           <button type="submit">Daftar</button>
         </form>
         <p>Sudah punya akun? <a href="#" id="show-login">Login di sini</a></p>
-        <button class="close-modal" id="close-register">&times;</button>
+        <button class="close-modal" id="close-register" aria-label="Tutup modal register">&times;</button>
       </div>
     </section>
 
+    <!-- Produk -->
     <section id="products-section">
       <h2>Produk</h2>
-      <div id="products-list" class="products-grid"></div>
-      <div id="loading" class="spinner" style="display:none"></div>
+      <div id="products-list" class="products-grid" aria-live="polite" aria-busy="false"></div>
+      <div id="loading" class="spinner" style="display:none" aria-hidden="true"></div>
     </section>
   </main>
 
