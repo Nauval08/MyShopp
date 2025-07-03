@@ -2,11 +2,14 @@
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   color: #333;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 header {
@@ -36,11 +39,14 @@ nav button {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   margin-left: 1rem;
+  user-select: none;
 }
 
-nav button:hover {
+nav button:hover,
+nav button:focus {
   background-color: #4f46e5;
   transform: scale(1.05);
+  outline: none;
 }
 
 nav #user-info {
@@ -64,6 +70,7 @@ h2 {
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
+  user-select: none;
 }
 
 /* Products Grid */
@@ -82,9 +89,11 @@ h2 {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  will-change: transform;
 }
 
-.product:hover {
+.product:hover,
+.product:focus-within {
   transform: translateY(-12px);
   box-shadow: 0 25px 35px rgba(0,0,0,0.2);
 }
@@ -94,6 +103,7 @@ h2 {
   height: 160px;
   object-fit: cover;
   border-bottom: 1px solid #eee;
+  user-select: none;
 }
 
 .product h3 {
@@ -121,11 +131,12 @@ form input {
   border-radius: 10px;
   border: 1px solid #ddd;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form input:focus {
   border-color: #4f46e5;
+  box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
   outline: none;
 }
 
@@ -140,22 +151,26 @@ form button {
   width: 100%;
   transition: background-color 0.3s ease, transform 0.2s ease;
   margin-top: 1rem;
+  user-select: none;
 }
 
-form button:hover {
+form button:hover,
+form button:focus {
   background-color: #3730a3;
   transform: scale(1.05);
+  outline: none;
 }
 
 /* Modal */
 .modal {
   position: fixed;
-  top: 0; left: 0; right:0; bottom:0;
+  top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
+  padding: 1rem;
 }
 
 .modal-content {
@@ -163,6 +178,7 @@ form button:hover {
   padding: 2rem;
   border-radius: 20px;
   width: 320px;
+  max-width: 100%;
   position: relative;
   box-shadow: 0 15px 30px rgba(0,0,0,0.2);
   animation: fadeIn 0.3s ease forwards;
@@ -178,10 +194,13 @@ form button:hover {
   cursor: pointer;
   font-weight: 700;
   transition: color 0.3s ease;
+  user-select: none;
 }
 
-.close-modal:hover {
+.close-modal:hover,
+.close-modal:focus {
   color: #4f46e5;
+  outline: none;
 }
 
 /* Spinner */
@@ -200,6 +219,6 @@ form button:hover {
 }
 
 @keyframes fadeIn {
-  from {opacity: 0; transform: translateY(-20px);}
-  to {opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
