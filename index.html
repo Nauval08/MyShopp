@@ -2,80 +2,56 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MeShopp | Cowok Style</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            inter: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            primary: '#0f172a',
-            accent: '#3b82f6',
-          },
-        },
-      },
-    };
-  </script>
-
-  <!-- Rifki API Client -->
-  <script src="https://rifkira.psl17.my.id/js/app.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toko Cihuy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gray-50 font-inter text-gray-800">
-
-  <!-- Header -->
-  <header class="bg-primary text-white px-6 py-4 flex justify-between items-center shadow-md">
-    <h1 class="text-2xl font-bold">MeShopp <span class="text-accent">| Cowok Style</span></h1>
-    <div class="space-x-4">
-      <a href="login.html" class="hover:underline">Login</a>
-      <a href="keranjang.html" class="bg-accent text-white px-4 py-2 rounded hover:bg-blue-700 transition-all">🛒 Keranjang</a>
-    </div>
+<body>
+  <header>
+    <h1>Toko Cihuy</h1>
+    <nav>
+      <button id="btn-login">Login</button>
+      <button id="btn-logout" style="display:none">Logout</button>
+      <span id="user-info"></span>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="text-center py-16 px-6 bg-white">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4">Koleksi Keren Buat Cowok Kekinian</h2>
-    <p class="text-gray-600 max-w-xl mx-auto">Temukan gaya yang cocok untuk kamu. Simpel, elegan, dan laki banget!</p>
-  </section>
+  <main>
+    <section id="login-section" class="modal" style="display:none">
+      <div class="modal-content">
+        <h2>Login</h2>
+        <form id="login-form">
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="password" id="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+        <p>Belum punya akun? <a href="#" id="show-register">Daftar di sini</a></p>
+        <button class="close-modal" id="close-login">&times;</button>
+      </div>
+    </section>
 
-  <!-- Produk Grid -->
-  <main class="px-6 py-10">
-    <section id="produk-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Produk akan dimuat lewat JavaScript -->
+    <section id="register-section" class="modal" style="display:none">
+      <div class="modal-content">
+        <h2>Register</h2>
+        <form id="register-form">
+          <input type="text" id="name" placeholder="Nama" required />
+          <input type="email" id="reg-email" placeholder="Email" required />
+          <input type="password" id="reg-password" placeholder="Password" required />
+          <button type="submit">Daftar</button>
+        </form>
+        <p>Sudah punya akun? <a href="#" id="show-login">Login di sini</a></p>
+        <button class="close-modal" id="close-register">&times;</button>
+      </div>
+    </section>
+
+    <section id="products-section">
+      <h2>Produk</h2>
+      <div id="products-list" class="products-grid"></div>
+      <div id="loading" class="spinner" style="display:none"></div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-primary text-white text-center py-4 text-sm">
-    © 2025 MeShopp. Untuk pria berkelas.
-  </footer>
-
-  <!-- JS Produk -->
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const container = document.getElementById("produk-container");
-      const products = await getProducts();
-
-      products.forEach(product => {
-        const el = document.createElement("div");
-        el.className = "bg-white rounded-xl shadow hover:shadow-xl transition p-4 flex flex-col";
-        el.innerHTML = `
-          <img src="${product.image_url}" alt="${product.name}" class="rounded-md mb-4 h-48 object-cover w-full">
-          <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
-          <p class="text-accent font-bold text-xl mb-4">Rp ${product.price.toLocaleString()}</p>
-          <button onclick="addToCart(${product.id})" class="mt-auto bg-accent text-white py-2 px-4 rounded hover:bg-blue-700 transition">+ Keranjang</button>
-        `;
-        container.appendChild(el);
-      });
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
