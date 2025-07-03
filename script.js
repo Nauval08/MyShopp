@@ -1,26 +1,19 @@
-let produk = [];
 
 fetch("https://rifkira.psl17.my.id/api/products")
   .then(res => res.json())
   .then(data => {
-    produk = data;
     const container = document.getElementById("produk-container");
-    produk.forEach(p => {
-      container.innerHTML += `
-        <div class="produk">
-          <img src="${p.image_url}" alt="${p.name}">
-          <h3>${p.name}</h3>
-          <p>Rp ${p.price.toLocaleString()}</p>
-          <button onclick="tambahKeranjang(${p.id})">Tambah ke Keranjang</button>
-        </div>
+    data.forEach(prod => {
+      const card = document.createElement("div");
+      card.className = "produk-card";
+      card.innerHTML = `
+        <img src="${prod.image_url}" alt="${prod.name}" />
+        <h3>${prod.name}</h3>
+        <p>Rp ${prod.price.toLocaleString()}</p>
       `;
+      container.appendChild(card);
     });
+  })
+  .catch(err => {
+    document.getElementById("produk-container").innerHTML = "<p>Gagal memuat produk.</p>";
   });
-
-function tambahKeranjang(id) {
-  const produkTerpilih = produk.find(p => p.id === id);
-  let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
-  keranjang.push(produkTerpilih);
-  localStorage.setItem("keranjang", JSON.stringify(keranjang));
-  alert(`${produkTerpilih.name} ditambahkan ke keranjang!`);
-}
